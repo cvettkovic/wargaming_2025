@@ -1,4 +1,5 @@
 import sqlite3 as sql
+import utils.constants as constants
 
 
 def create_connection_and_cursor(db_name):
@@ -64,9 +65,7 @@ def create_engines_table(connection, cursor):
     connection.commit()
 
 
-DB_NAME = "wargaming_task_db.db"
-
-connection, cursor = create_connection_and_cursor(DB_NAME)
+connection, cursor = create_connection_and_cursor(constants.DB_NAME)
 
 create_ships_table(connection, cursor)
 create_engines_table(connection, cursor)
