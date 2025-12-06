@@ -18,21 +18,21 @@ def create_connection_and_cursor(db_name):
 def populate_ships_table(connection, cursor, weapons, hulls, engines):
     sql_command_template = """
         INSERT INTO ships
-        VALUES (%s, %s, %s, %s)
+        VALUES ('{ship}', '{weapon}', '{hull}', '{engine}')
         """
-    ship_name_template = "Ship-%d"
+    ship_name_template = "Ship-{ship_number}"
 
     for i in range(1, constants.NUMBER_OF_SHIPS_IN_DB + 1):
         chosen_weapon = random.choice(weapons)
         chosen_hull = random.choice(hulls)
         chosen_engine = random.choice(engines)
 
-        final_ship_name = ship_name_template.format(i)
+        final_ship_name = ship_name_template.format(ship_number = i)
         final_sql_command = sql_command_template.format(
-            final_ship_name,
-            chosen_weapon,
-            chosen_hull,
-            chosen_engine,
+            ship = final_ship_name,
+            weapon = chosen_weapon,
+            hull = chosen_hull,
+            engine = chosen_engine,
         )
 
         cursor.execute(final_sql_command)
@@ -43,20 +43,21 @@ def populate_ships_table(connection, cursor, weapons, hulls, engines):
 def populate_weapons_table(connection, cursor):
     sql_command_template = """
         INSERT INTO weapons
-        VALUES (%s, %d, %d, %d, %d, %d)
+        VALUES ('{weapon}', {reload_speed}, {rotational_speed},
+                {diameter}, {power_volley}, {count})
         """
-    weapon_name_template = "Weapon-%d"
+    weapon_name_template = "Weapon-{weapon_number}"
     weapons_list = []
 
     for i in range(1, constants.NUMBER_OF_WEAPONS_IN_DB + 1):
-        final_weapon_name = weapon_name_template.format(i)
+        final_weapon_name = weapon_name_template.format(weapon_number = i)
         final_sql_command = sql_command_template.format(
-            final_weapon_name,
-            get_random_number(),
-            get_random_number(),
-            get_random_number(),
-            get_random_number(),
-            get_random_number(),
+            weapon = final_weapon_name,
+            reload_speed = get_random_number(),
+            rotational_speed = get_random_number(),
+            diameter = get_random_number(),
+            power_volley = get_random_number(),
+            count = get_random_number(),
         )
 
         cursor.execute(final_sql_command)
@@ -70,18 +71,18 @@ def populate_weapons_table(connection, cursor):
 def populate_hulls_table(connection, cursor):
     sql_command_template = """
         INSERT INTO hulls
-        VALUES (%s, %d, %d, %d)
+        VALUES ('{hull}', {armor}, {type}, {capacity})
         """
-    hull_name_template = "Hull-%d"
+    hull_name_template = "Hull-{hull_number}"
     hulls_list = []
 
     for i in range(1, constants.NUMBER_OF_HULLS_IN_DB + 1):
-        final_hull_name = hull_name_template.format(i)
+        final_hull_name = hull_name_template.format(hull_number = i)
         final_sql_command = sql_command_template.format(
-            final_hull_name,
-            get_random_number(),
-            get_random_number(),
-            get_random_number(),
+            hull = final_hull_name,
+            armor = get_random_number(),
+            type = get_random_number(),
+            capacity = get_random_number(),
         )
 
         cursor.execute(final_sql_command)
@@ -95,17 +96,17 @@ def populate_hulls_table(connection, cursor):
 def populate_engines_table(connection, cursor):
     sql_command_template = """
         INSERT INTO engines
-        VALUES (%s, %d, %d)
+        VALUES ('{engine}', {power}, {type})
         """
-    engine_name_template = "Engine-%d"
+    engine_name_template = "Engine-{engine_number}"
     engines_list = []
 
     for i in range(1, constants.NUMBER_OF_ENGINES_IN_DB + 1):
-        final_engine_name = engine_name_template.format(i)
+        final_engine_name = engine_name_template.format(engine_number = i)
         final_sql_command = sql_command_template.format(
-            final_engine_name,
-            get_random_number(),
-            get_random_number(),
+            engine = final_engine_name,
+            power = get_random_number(),
+            type = get_random_number(),
         )
 
         cursor.execute(final_sql_command)
