@@ -1,11 +1,7 @@
 import sqlite3 as sql
 import random
 import utils.constants as constants
-
-
-def get_random_number(min_inclusive=constants.MIN_RANDOM_NUMBER,
-                      max_inclusive=constants.MAX_RANDOM_NUMBER):
-    return random.randint(min_inclusive, max_inclusive)
+import utils.random_utils as rand
 
 
 def create_connection_and_cursor(db_name):
@@ -53,11 +49,11 @@ def populate_weapons_table(connection, cursor):
         final_weapon_name = weapon_name_template.format(weapon_number = i)
 
         sql_command_parameters.append((final_weapon_name,
-                                       get_random_number(),
-                                       get_random_number(),
-                                       get_random_number(),
-                                       get_random_number(),
-                                       get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
                                        ))
         weapons_list.append(final_weapon_name)
     
@@ -80,9 +76,9 @@ def populate_hulls_table(connection, cursor):
         final_hull_name = hull_name_template.format(hull_number = i)
         
         sql_command_parameters.append((final_hull_name,
-                                       get_random_number(),
-                                       get_random_number(),
-                                       get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
                                        ))
         hulls_list.append(final_hull_name)
     
@@ -105,8 +101,8 @@ def populate_engines_table(connection, cursor):
         final_engine_name = engine_name_template.format(engine_number = i)
         
         sql_command_parameters.append((final_engine_name,
-                                       get_random_number(),
-                                       get_random_number(),
+                                       rand.get_random_number(),
+                                       rand.get_random_number(),
                                        ))
         engines_list.append(final_engine_name)
     
