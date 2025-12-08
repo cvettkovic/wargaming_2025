@@ -18,7 +18,7 @@ def create_connection_and_cursor(db_name):
 def populate_ships_table(connection, cursor, weapons, hulls, engines):
     sql_command = """
         INSERT INTO ships (ship, weapon, hull, engine)
-        VALUES ('?', '?', '?', '?')
+        VALUES (?, ?, ?, ?)
         """
     ship_name_template = "Ship-{ship_number}"
     sql_command_parameters = []
@@ -43,7 +43,7 @@ def populate_weapons_table(connection, cursor):
     sql_command = """
         INSERT INTO weapons (weapon, reload_speed, rotational_speed,
                             diameter, power_volley, count)
-        VALUES ('?', ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
         """
     weapon_name_template = "Weapon-{weapon_number}"
     weapons_list = []
@@ -70,7 +70,7 @@ def populate_weapons_table(connection, cursor):
 def populate_hulls_table(connection, cursor):
     sql_command = """
         INSERT INTO hulls (hull, armor, type, capacity)
-        VALUES ('?', ?, ?, ?)
+        VALUES (?, ?, ?, ?)
         """
     hull_name_template = "Hull-{hull_number}"
     hulls_list = []
@@ -95,7 +95,7 @@ def populate_hulls_table(connection, cursor):
 def populate_engines_table(connection, cursor):
     sql_command = """
         INSERT INTO engines (engine, power, type)
-        VALUES ('?', ?, ?)
+        VALUES (?, ?, ?)
         """
     engine_name_template = "Engine-{engine_number}"
     engines_list = []
