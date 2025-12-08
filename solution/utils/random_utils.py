@@ -1,5 +1,5 @@
 import random
-import constants
+import utils.constants as constants
 
 
 def get_random_number(min_inclusive=constants.MIN_RANDOM_NUMBER,
