@@ -10,7 +10,8 @@ def get_random_number(min_inclusive=constants.MIN_RANDOM_NUMBER,
 def change_non_first_element_to_random(tuple_):
     tuple_length = len(tuple_)
     last_index_in_tuple = tuple_length - 1
-    index_to_change = get_random_number(min_inclusive=1, max_inclusive=last_index_in_tuple)
+    index_to_change = get_random_number(min_inclusive=1,
+                                        max_inclusive=last_index_in_tuple)
 
     values = []
     for i in range(0, tuple_length):
