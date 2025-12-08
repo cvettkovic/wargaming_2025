@@ -84,7 +84,7 @@ def alter_all_engines(connection):
     connection.commit()
 
 
-#@pytest.fixture(scope="session")
+#@pytest.fixture(scope="session") # FIXME
 def temporary_db():
     original_db_connection = sql.connect(constants.DB_NAME)
     temporary_db_connection = sql.connect(constants.TEMPORARY_DB_NAME)
@@ -96,10 +96,8 @@ def temporary_db():
     alter_all_hulls(temporary_db_connection)
     alter_all_weapons(temporary_db_connection)
 
-    #yield temporary_db_connection
+    #yield temporary_db_connection # FIXME
 
     original_db_connection.close()
     temporary_db_connection.close()
-
-temporary_db()
 
