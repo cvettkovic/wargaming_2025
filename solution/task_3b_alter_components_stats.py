@@ -101,6 +101,6 @@ def temporary_db():
     original_db_connection.close()
     temporary_db_connection.close()
 
-    if os.path.exists(constants.TEMPORARY_DB_NAME):
-        os.remove(constants.TEMPORARY_DB_NAME)
+    # if os.path.exists(constants.TEMPORARY_DB_NAME): FIXME
+    #     os.remove(constants.TEMPORARY_DB_NAME) FIXME
 
