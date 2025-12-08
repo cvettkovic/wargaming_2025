@@ -16,102 +16,101 @@ def create_connection_and_cursor(db_name):
 
 
 def populate_ships_table(connection, cursor, weapons, hulls, engines):
-    sql_command_template = """
-        INSERT INTO ships
-        VALUES ('{ship}', '{weapon}', '{hull}', '{engine}')
+    sql_command = """
+        INSERT INTO ships (ship, weapon, hull, engine)
+        VALUES ('?', '?', '?', '?')
         """
     ship_name_template = "Ship-{ship_number}"
+    sql_command_parameters = []
 
     for i in range(1, constants.NUMBER_OF_SHIPS_IN_DB + 1):
+        final_ship_name = ship_name_template.format(ship_number = i)
         chosen_weapon = random.choice(weapons)
         chosen_hull = random.choice(hulls)
         chosen_engine = random.choice(engines)
 
-        final_ship_name = ship_name_template.format(ship_number = i)
-        final_sql_command = sql_command_template.format(
-            ship = final_ship_name,
-            weapon = chosen_weapon,
-            hull = chosen_hull,
-            engine = chosen_engine,
-        )
+        sql_command_parameters.append((final_ship_name,
+                                      chosen_weapon,
+                                      chosen_hull,
+                                      chosen_engine,
+                                      ))
 
-        cursor.execute(final_sql_command)
-    
+    cursor.executemany(sql_command, sql_command_parameters)
     connection.commit()
 
 
 def populate_weapons_table(connection, cursor):
-    sql_command_template = """
-        INSERT INTO weapons
-        VALUES ('{weapon}', {reload_speed}, {rotational_speed},
-                {diameter}, {power_volley}, {count})
+    sql_command = """
+        INSERT INTO weapons (weapon, reload_speed, rotational_speed,
+                            diameter, power_volley, count)
+        VALUES ('?', ?, ?, ?, ?, ?)
         """
     weapon_name_template = "Weapon-{weapon_number}"
     weapons_list = []
+    sql_command_parameters = []
 
     for i in range(1, constants.NUMBER_OF_WEAPONS_IN_DB + 1):
         final_weapon_name = weapon_name_template.format(weapon_number = i)
-        final_sql_command = sql_command_template.format(
-            weapon = final_weapon_name,
-            reload_speed = get_random_number(),
-            rotational_speed = get_random_number(),
-            diameter = get_random_number(),
-            power_volley = get_random_number(),
-            count = get_random_number(),
-        )
 
-        cursor.execute(final_sql_command)
+        sql_command_parameters.append((final_weapon_name,
+                                       get_random_number(),
+                                       get_random_number(),
+                                       get_random_number(),
+                                       get_random_number(),
+                                       get_random_number(),
+                                       ))
         weapons_list.append(final_weapon_name)
     
+    cursor.executemany(sql_command, sql_command_parameters)
     connection.commit()
 
     return weapons_list
 
 
 def populate_hulls_table(connection, cursor):
-    sql_command_template = """
-        INSERT INTO hulls
-        VALUES ('{hull}', {armor}, {type}, {capacity})
+    sql_command = """
+        INSERT INTO hulls (hull, armor, type, capacity)
+        VALUES ('?', ?, ?, ?)
         """
     hull_name_template = "Hull-{hull_number}"
     hulls_list = []
+    sql_command_parameters = []
 
     for i in range(1, constants.NUMBER_OF_HULLS_IN_DB + 1):
         final_hull_name = hull_name_template.format(hull_number = i)
-        final_sql_command = sql_command_template.format(
-            hull = final_hull_name,
-            armor = get_random_number(),
-            type = get_random_number(),
-            capacity = get_random_number(),
-        )
-
-        cursor.execute(final_sql_command)
+        
+        sql_command_parameters.append((final_hull_name,
+                                       get_random_number(),
+                                       get_random_number(),
+                                       get_random_number(),
+                                       ))
         hulls_list.append(final_hull_name)
     
+    cursor.executemany(sql_command, sql_command_parameters)
     connection.commit()
 
     return hulls_list
 
 
 def populate_engines_table(connection, cursor):
-    sql_command_template = """
-        INSERT INTO engines
-        VALUES ('{engine}', {power}, {type})
+    sql_command = """
+        INSERT INTO engines (engine, power, type)
+        VALUES ('?', ?, ?)
         """
     engine_name_template = "Engine-{engine_number}"
     engines_list = []
+    sql_command_parameters = []
 
     for i in range(1, constants.NUMBER_OF_ENGINES_IN_DB + 1):
         final_engine_name = engine_name_template.format(engine_number = i)
-        final_sql_command = sql_command_template.format(
-            engine = final_engine_name,
-            power = get_random_number(),
-            type = get_random_number(),
-        )
-
-        cursor.execute(final_sql_command)
+        
+        sql_command_parameters.append((final_engine_name,
+                                       get_random_number(),
+                                       get_random_number(),
+                                       ))
         engines_list.append(final_engine_name)
     
+    cursor.executemany(sql_command, sql_command_parameters)
     connection.commit()
 
     return engines_list
