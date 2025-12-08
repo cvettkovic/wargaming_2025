@@ -1,4 +1,5 @@
-DB_NAME = "wargaming_task_db.db"
+DB_NAME = "wargaming_db.db"
+SECONDARY_DB_NAME = "wargaming_secondary_db.db"
 
 MIN_RANDOM_NUMBER = 1
 MAX_RANDOM_NUMBER = 20
