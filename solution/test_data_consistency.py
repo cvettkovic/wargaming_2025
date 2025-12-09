@@ -1,13 +1,6 @@
+import utils.db_utils as db
 
 
-def test_weapons_table_consistency(original_weapons, temporary_db):
-    pass
-
-
-def test_hulls_table_consistency(original_hulls, temporary_db):
-    pass
-
-
-def test_engines_table_consistency(original_engines, temporary_db):
+def test_ships_differences(ships_data, temporary_db):
     pass
 

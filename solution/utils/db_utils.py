@@ -4,12 +4,26 @@ import utils.random_utils as rand
 def get_all_from_table(connection, table_name):
     cursor = connection.cursor()
 
-    fetch_sql_command = """
+    select_sql_command = """
             SELECT *
             FROM ?
             """
-    cursor.execute(fetch_sql_command, table_name)
+    cursor.execute(select_sql_command, table_name)
     connection.commit()
+
+    return cursor.fetchall()
+
+
+def get_from_table(connection, table_name, key_name, key_value):
+    cursor = connection.cursor()
+
+    select_sql_command = """
+            SELECT *
+            FROM ?
+            WHERE ? = ?
+            """
+    cursor.execute(select_sql_command, (table_name, key_name, key_value))
+    cursor.commit()
 
     return cursor.fetchall()
 
