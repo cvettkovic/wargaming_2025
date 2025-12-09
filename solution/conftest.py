@@ -28,8 +28,28 @@ def db_connections():
 
 
 def pytest_generate_tests(metafunc):
-    if "ships_data" in metafunc.fixturenames:
-        connection = sql.connect(constants.DB_NAME)
-        ships_data = db.get_all_from_table(connection, "ships")
-        metafunc.parametrize("ships_data", ships_data)
+    # if "ship_data" in metafunc.fixturenames:
+    #     connection = sql.connect(constants.DB_NAME)
+    #     ship_data = db.get_from_table(connection, "ships")
+    #     metafunc.parametrize("ship_data", ship_data)
+    #     connection.close()
+    connection = sql.connect(constants.DB_NAME)
+    
+    if "ship_weapon_data" in metafunc.fixturenames:
+        ship_weapon_data = db.get_from_table(connection,
+                                             "ships",
+                                             columns="ship, weapon")
+        metafunc.parametrize("ship_weapon_data", ship_weapon_data)
+    elif "ship_hull_data" in metafunc.fixturenames:
+        ship_hull_data = db.get_from_table(connection,
+                                             "ships",
+                                             columns="ship, hull")
+        metafunc.parametrize("ship_hull_data", ship_hull_data)
+    elif "ship_engine_data" in metafunc.fixturenames:
+        ship_engine_data = db.get_from_table(connection,
+                                             "ships",
+                                             columns="ship, engine")
+        metafunc.parametrize("ship_engine_data", ship_engine_data)
+    
+    connection.close()
 

@@ -1,35 +1,35 @@
 import utils.random_utils as rand
 
 
-def get_all_from_table(connection, table_name):
+def get_from_table(connection, table_name, columns=None):
     cursor = connection.cursor()
 
-    select_sql_command = """
-            SELECT *
-            FROM ?
+    select_sql_command = f"""
+            SELECT {"*" if columns is None else columns}
+            FROM {table_name}
             """
-    cursor.execute(select_sql_command, table_name)
+    cursor.execute(select_sql_command)
     connection.commit()
 
     return cursor.fetchall()
 
 
-def get_from_table(connection, table_name, key_name, key_value):
+def get_single_from_table(connection, table_name, key_name, key_value):
     cursor = connection.cursor()
 
-    select_sql_command = """
+    select_sql_command = f"""
             SELECT *
-            FROM ?
-            WHERE ? = ?
+            FROM {table_name}
+            WHERE {key_name} = ?
             """
-    cursor.execute(select_sql_command, (table_name, key_name, key_value))
-    cursor.commit()
+    cursor.execute(select_sql_command, (key_value,))
+    connection.commit()
 
-    return cursor.fetchall()
+    return cursor.fetchone()
 
 
 def alter_all_weapons(connection):
-    all_weapons = get_all_from_table(connection, "weapons")
+    all_weapons = get_from_table(connection, "weapons")
     all_weapons = [rand.change_random_integer_and_move_first_element(weapon)
                    for weapon
                    in all_weapons]
@@ -48,7 +48,7 @@ def alter_all_weapons(connection):
 
 
 def alter_all_hulls(connection):
-    all_hulls = get_all_from_table(connection, "hulls")
+    all_hulls = get_from_table(connection, "hulls")
     all_hulls = [rand.change_random_integer_and_move_first_element(hull)
                  for hull
                  in all_hulls]
@@ -65,7 +65,7 @@ def alter_all_hulls(connection):
 
 
 def alter_all_engines(connection):
-    all_engines = get_all_from_table(connection, "engines")
+    all_engines = get_from_table(connection, "engines")
     all_engines = [rand.change_random_integer_and_move_first_element(engine)
                    for engine
                    in all_engines]

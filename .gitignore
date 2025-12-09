@@ -2,3 +2,4 @@ solution/__pycache__/
 solution/*.db
 solution/utils/__pycache__/
 solution/sandbox.py
+solution/*.txt
