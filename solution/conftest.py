@@ -4,6 +4,7 @@ import utils.constants as constants
 import sqlite3 as sql
 import utils.db_utils as db
 
+
 @pytest.fixture(scope="session")
 def temporary_db():
     original_db_connection = sql.connect(constants.DB_NAME)
@@ -13,14 +14,15 @@ def temporary_db():
     original_db_connection.backup(temporary_db_connection)
     original_db_connection.close()
 
+    # Alter values randomly
     db.alter_all_engines(temporary_db_connection)
     db.alter_all_hulls(temporary_db_connection)
     db.alter_all_weapons(temporary_db_connection)
 
     yield temporary_db_connection
 
+    # Teardown
     temporary_db_connection.close()
-
     if os.path.exists(constants.TEMPORARY_DB_NAME):
         os.remove(constants.TEMPORARY_DB_NAME)
 
@@ -39,5 +41,4 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize("original_engines", original_engines)
     
     connection.close()
-
 
