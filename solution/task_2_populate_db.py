@@ -17,8 +17,11 @@ def populate_ships_table(connection, cursor, weapons, hulls, engines):
         VALUES (?, ?, ?, ?)
         """
     ship_name_template = "Ship-{ship_number}"
-    sql_command_parameters = []
+    sql_command_parameters = []  # All insertions will be executed at once
 
+    # Lists of components were needed so that additional querying
+    # of the DB is not needed now. Starting from 1 purely so that the
+    # naming can start from 1
     for i in range(1, constants.NUMBER_OF_SHIPS_IN_DB + 1):
         final_ship_name = ship_name_template.format(ship_number = i)
         chosen_weapon = random.choice(weapons)
@@ -42,9 +45,11 @@ def populate_weapons_table(connection, cursor):
         VALUES (?, ?, ?, ?, ?, ?)
         """
     weapon_name_template = "Weapon-{weapon_number}"
-    weapons_list = []
-    sql_command_parameters = []
+    weapons_list = []  # Needed for efficient choice of ship components
+    sql_command_parameters = []  # All insertions will be executed at once
 
+    # Prepare values to be inserted. Starting from 1 purely so that the
+    # naming can start from 1
     for i in range(1, constants.NUMBER_OF_WEAPONS_IN_DB + 1):
         final_weapon_name = weapon_name_template.format(weapon_number = i)
 
@@ -69,9 +74,11 @@ def populate_hulls_table(connection, cursor):
         VALUES (?, ?, ?, ?)
         """
     hull_name_template = "Hull-{hull_number}"
-    hulls_list = []
-    sql_command_parameters = []
+    hulls_list = []  # Needed for efficient choice of ship components
+    sql_command_parameters = []  # All insertions will be executed at once
 
+    # Prepare values to be inserted. Starting from 1 purely so that the
+    # naming can start from 1
     for i in range(1, constants.NUMBER_OF_HULLS_IN_DB + 1):
         final_hull_name = hull_name_template.format(hull_number = i)
         
@@ -94,9 +101,11 @@ def populate_engines_table(connection, cursor):
         VALUES (?, ?, ?)
         """
     engine_name_template = "Engine-{engine_number}"
-    engines_list = []
-    sql_command_parameters = []
+    engines_list = []  # Needed for efficient choice of ship components
+    sql_command_parameters = []  # All insertions will be executed at once
 
+    # Prepare values to be inserted. Starting from 1 purely so that the
+    # naming can start from 1
     for i in range(1, constants.NUMBER_OF_ENGINES_IN_DB + 1):
         final_engine_name = engine_name_template.format(engine_number = i)
         
@@ -114,6 +123,7 @@ def populate_engines_table(connection, cursor):
 
 connection, cursor = create_connection_and_cursor(constants.DB_NAME)
 
+# Populating ships last because of the foreign key
 weapons = populate_weapons_table(connection, cursor)
 hulls = populate_hulls_table(connection, cursor)
 engines = populate_engines_table(connection, cursor)

@@ -30,6 +30,7 @@ def db_connections():
 def pytest_generate_tests(metafunc):
     connection = sql.connect(constants.DB_NAME)
     
+    # Each test gets data from own table
     if "ship_weapon_data" in metafunc.fixturenames:
         ship_weapon_data = db.get_from_table(connection,
                                              "ships",

@@ -67,6 +67,7 @@ def create_engines_table(connection, cursor):
 
 connection, cursor = create_connection_and_cursor(constants.DB_NAME)
 
+# Make ships table first because of the foreign keys
 create_ships_table(connection, cursor)
 create_engines_table(connection, cursor)
 create_hulls_table(connection, cursor)
