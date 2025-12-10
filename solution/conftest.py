@@ -18,6 +18,7 @@ def db_connections():
     db.alter_all_hulls(temporary_db_connection)
     db.alter_all_weapons(temporary_db_connection)
 
+    # Both DBs will need to be queried
     yield (original_db_connection, temporary_db_connection)
 
     # Teardown
