@@ -5,3 +5,4 @@ solution/sandbox.py
 solution/*.txt
 solution/.pytest_cache
 .pytest_cache
+*.db
