@@ -3,3 +3,4 @@ solution/*.db
 solution/utils/__pycache__/
 solution/sandbox.py
 solution/*.txt
+solution/.pytest_cache
