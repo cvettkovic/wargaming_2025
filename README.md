@@ -13,12 +13,12 @@ The `solution/` directory contains several modules:
 - `test_data_consistency.py` contains test definitions that use functionalities of *pytest* tool.
 
 Inside of the `solution/` directory, there is a `solution/utils/` subdirectory. It is home to some modules (*utils*) that group similar-purposed functionalities and constants which are used across several other modules, or which are better off in their separate module. Those utils are:
-- `constants.py`, which is a basic file that contains only constants defined in the task and that can be tweaked in order to produce different code behaviour;
+- `constants.py`, which is a basic python file that contains only constants defined in the task and that can be tweaked in order to produce different code behaviour;
 - `db_utils.py`, which contains some general functions which work with the database (note that not all DB-related functions are stored here);
 - `random_utils.py`, which contains functions that are connected to operations which utilize randomness;
 - `diff_utils.py`, which is home to functions that are used in `test_data_consistency.py` module, but are refactored outside of it for the sake of code readability.
 
-Variable and function naming in these modules is such that it promotes readability and reflects usage - it is intended that the reader may conclude what the variable or a function is used for without having to think much about it. However, on some sections that might not be clear enough, the comment are also provided. Blank lines are put in such a manner to promote logical steps. Furthermore, function that are contained in *utils* each have their docstrings.
+Variable and function naming in these modules is such that it promotes readability and reflects usage - it is written so that the reader may conclude what the variable or a function is used for without having to think much about it. However, on some sections that might not be clear enough, comments are also provided. Blank lines are put in such a manner to promote logical steps. Furthermore, functions that are contained in *utils* each have their docstrings.
 
 During writing of the code, *PEP8* standard was followed as much as possible, and lines' length is limited to maximum of **79** characters.
 
