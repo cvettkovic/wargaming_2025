@@ -4,6 +4,8 @@ This is the solution I submit for the **Take Home task** for application to *Aut
 
 The code is written completely in Python, and all of it can be found in the `solution/` directory.
 
+Please note that for third task option **B** was chosen, and so was for the fourth one (however, part **B.2** is not implemented because, logically, there cannot be failed tests in this part, and supporting it would generate more that **600** tests that are required in general task requirements - this is also mentioned in `test_data_consistency.py` module).
+
 ### Code organization and structure
 
 The `solution/` directory contains several modules:
